@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:guru_app/schedule_screen.dart';
 import 'package:shared/models.dart';
 import 'package:shared/providers/auth_provider.dart';
 import 'package:shared/widgets/card.dart';
@@ -60,7 +61,12 @@ class HomeScreen extends ConsumerWidget {
             }
           }),
           const SizedBox(height: 16),
-          buildCard(context, 'Schedule Call', Icons.calendar_month, () {}),
+          buildCard(context, 'Schedule Call', Icons.calendar_month, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ScheduleScreen()),
+            );
+          }),
           const SizedBox(height: 16),
           buildCard(context, 'My Sessions', Icons.video_call, () {}),
         ],
