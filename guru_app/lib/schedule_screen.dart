@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -106,7 +108,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                   _selectedDayOffset = index;
                   _selectedTime = null; // Reset time on day change
                 }),
-                selectedColor: const Color(0xFF1769E0).withOpacity(0.2),
+                selectedColor: const Color(0xFF1769E0).withValues(alpha: 0.2),
               );
             }),
           ),
@@ -125,7 +127,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 label: Text(time.format(context)),
                 selected: isSelected,
                 onSelected: (val) => setState(() => _selectedTime = time),
-                selectedColor: const Color(0xFF1769E0).withOpacity(0.2),
+                selectedColor: const Color(0xFF1769E0).withValues(alpha: 0.2),
               );
             }).toList(),
           ),
