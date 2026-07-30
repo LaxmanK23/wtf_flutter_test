@@ -25,7 +25,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
 
   // Generate 30-min blocks (e.g., 9:00 AM to 5:00 PM)
   List<TimeOfDay> get _timeSlots {
-    return List.generate(16, (i) {
+    return List.generate(19, (i) {
       int hour = 9 + (i ~/ 2);
       int minute = (i % 2) == 0 ? 0 : 30;
       return TimeOfDay(hour: hour, minute: minute);
@@ -118,6 +118,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
+            runSpacing: 8,
             children: _timeSlots.map((time) {
               final isSelected = _selectedTime == time;
               return ChoiceChip(
