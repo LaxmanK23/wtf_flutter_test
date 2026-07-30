@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared/widgets/card.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -33,49 +34,12 @@ class HomeScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0), // 8pt spacing
         children: [
-          _buildCard(context, 'Chat with Trainer', Icons.chat, () {
-          
-          }),
+          buildCard(context, 'Chat with Trainer', Icons.chat, () {}),
           const SizedBox(height: 16),
-          _buildCard(context, 'Schedule Call', Icons.calendar_month, () {
-         
-          }),
+          buildCard(context, 'Schedule Call', Icons.calendar_month, () {}),
           const SizedBox(height: 16),
-          _buildCard(context, 'My Sessions', Icons.video_call, () {
-      
-          }),
+          buildCard(context, 'My Sessions', Icons.video_call, () {}),
         ],
-      ),
-    );
-  }
-
-  Widget _buildCard(
-    BuildContext context,
-    String title,
-    IconData icon,
-    VoidCallback onTap,
-  ) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        padding: const EdgeInsets.all(24.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade300),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Row(
-          children: [
-            Icon(icon, size: 32, color: const Color(0xFF1769E0)),
-            const SizedBox(width: 16),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-            ), // H2
-            const Spacer(),
-            const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
-          ],
-        ),
       ),
     );
   }
