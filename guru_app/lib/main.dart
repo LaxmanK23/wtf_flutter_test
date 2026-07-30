@@ -21,7 +21,11 @@ void main() async {
   Hive.registerAdapter(CallRequestAdapter());
   Hive.registerAdapter(SessionLogAdapter());
   Hive.registerAdapter(RoomMetaAdapter());
-
+  await Hive.openBox('auth');
+  await Hive.openBox('messages');
+  await Hive.openBox('call_requests');
+  await Hive.openBox('room_meta');
+  await Hive.openBox('session_logs');
   // Open boxes
   await Hive.openBox('users');
   await Hive.openBox('messages');

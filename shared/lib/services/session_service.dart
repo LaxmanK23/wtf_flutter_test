@@ -3,22 +3,23 @@ import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:uuid/uuid.dart';
 import '../models.dart';
 
-final sessionServiceProvider = NotifierProvider(() {
+// Explicitly provide both <SessionService, List<SessionLog>>
+final sessionServiceProvider = NotifierProvider<SessionService, List<SessionLog>>(() {
   return SessionService();
 });
 
-class SessionService extends Notifier {
+// Extend Notifier with <List<SessionLog>>
+class SessionService extends Notifier<List<SessionLog>> {
   late Box _sessionBox;
   final _uuid = const Uuid();
 
   @override
-  List build() {
-    _sessionBox = Hive.box('session_logs'); // Ensure opened in main.dart
-    return _sessionBox.values.cast().toList();
+  List<SessionLog> build() {
+    _sessionBox = Hive.box('session_logs');
+    return _sessionBox.values.cast<SessionLog>().toList();
   }
 
-  /// Auto-writes the session log when call ends
-  Future createLog({
+  Future<SessionLog> createLog({
     required String memberId,
     required String trainerId,
     required DateTime startedAt,
@@ -31,7 +32,7 @@ class SessionService extends Notifier {
       trainerId: trainerId,
       startedAt: startedAt,
       endedAt: endedAt,
-      durationSec: durationSec < 1 ? 1 : durationSec, // Fallback mock safeguard
+      durationSec: durationSec < 1 ? 1 : durationSec,
     );
 
     state = [...state, log];
@@ -39,8 +40,7 @@ class SessionService extends Notifier {
     return log;
   }
 
-  /// Member adds rating and optional note
-  Future updateMemberFeedback(String logId, int rating, String note) async {
+  Future<void> updateMemberFeedback(String logId, int rating, String note) async {
     final log = state.firstWhere((l) => l.id == logId);
     final updated = SessionLog(
       id: log.id, memberId: log.memberId, trainerId: log.trainerId,
@@ -51,8 +51,7 @@ class SessionService extends Notifier {
     await _sessionBox.put(updated.id, updated);
   }
 
-  /// Trainer adds notes and marks complete
-  Future updateTrainerNotes(String logId, String notes) async {
+  Future<void> updateTrainerNotes(String logId, String notes) async {
     final log = state.firstWhere((l) => l.id == logId);
     final updated = SessionLog(
       id: log.id, memberId: log.memberId, trainerId: log.trainerId,

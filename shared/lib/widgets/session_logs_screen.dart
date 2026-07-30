@@ -71,7 +71,6 @@ class _SessionLogsScreenState extends ConsumerState<SessionLogsScreen> {
             ),
             const SizedBox(height: 24),
             // Bonus Export: Share text summary using SharePlus
-            // Export Summary Button
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1769E0),
@@ -81,13 +80,7 @@ class _SessionLogsScreenState extends ConsumerState<SessionLogsScreen> {
               label: const Text('Export Summary'),
               onPressed: () {
                 final summary =
-                    'Fitness Coaching Session Summary\n'
-                    'Date: $dateStr\n'
-                    'Duration: $durationMin mins\n'
-                    'Rating: ${log.rating ?? "N/A"}/5\n'
-                    'Trainer Notes: ${log.trainerNotes ?? "None"}';
-
-                // Correct SharePlus syntax matching the latest package version
+                    'Fitness Coaching Session Summary\nDate: $dateStr\nDuration: $durationMin mins\nRating: ${log.rating ?? "N/A"}/5\nTrainer Notes: ${log.trainerNotes ?? "None"}';
                 SharePlus.instance.share(ShareParams(text: summary));
               },
             ),
@@ -116,7 +109,7 @@ class _SessionLogsScreenState extends ConsumerState<SessionLogsScreen> {
                   label: Text(filter),
                   selected: _selectedFilter == filter,
                   onSelected: (val) => setState(() => _selectedFilter = filter),
-                  selectedColor: const Color(0xFF1769E0).withValues(alpha: 0.2),
+                  selectedColor: const Color(0xFF1769E0).withOpacity(0.2),
                 );
               }).toList(),
             ),
@@ -141,7 +134,6 @@ class _SessionLogsScreenState extends ConsumerState<SessionLogsScreen> {
                           style: TextStyle(color: Colors.grey, fontSize: 16),
                         ),
                         const SizedBox(height: 16),
-                        // Required Acceptance Copy with widget. prefix for callback
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1769E0),
