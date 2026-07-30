@@ -13,8 +13,10 @@ dependencies:
   flutter_riverpod: ^3.4.2
   hive_ce: ^2.19.3
   hive_ce_flutter: ^2.3.4
+  hmssdk_flutter: ^1.11.1
   http: ^1.6.0
   intl: ^0.20.3
+  permission_handler: ^12.0.3
   uuid: ^4.6.0
 dev_dependencies:
   flutter_test:
