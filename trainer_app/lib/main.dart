@@ -7,6 +7,7 @@ import 'package:shared/models.dart';
 import 'package:shared/providers/auth_provider.dart';
 import 'package:trainer_app/home_screen.dart';
 import 'package:trainer_app/login_screen.dart';
+import 'package:shared/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,14 +40,16 @@ class TrainerApp extends ConsumerWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
       title: 'Trainer App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFE50914),
-        ), // Required Red
-        scaffoldBackgroundColor: Colors.white,
-        useMaterial3: true,
-      ),
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(
+      //     seedColor: const Color(0xFFE50914),
+      //   ), // Required Red
+      //   scaffoldBackgroundColor: Colors.white,
+      //   useMaterial3: true,
+      // ),
+      theme: AppTheme.trainerTheme,
       // Router logic based on auth state
       home: currentUser == null ? const LoginScreen() : const HomeScreen(),
     );

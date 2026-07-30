@@ -5,6 +5,7 @@ import 'package:guru_app/onboarding_screen.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:shared/models.dart';
 import 'package:shared/providers/auth_provider.dart';
+import 'package:shared/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Guru App',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      theme: AppTheme.guruTheme,
+      // theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
       home: const GuruApp(),
     );
   }
