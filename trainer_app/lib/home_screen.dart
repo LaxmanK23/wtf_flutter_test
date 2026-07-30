@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared/widgets/tiles.dart';
+import 'package:shared/widgets/conversation_screen.dart';
+import 'package:shared/models.dart';
+import 'package:shared/providers/auth_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -38,7 +41,30 @@ class HomeScreen extends ConsumerWidget {
         crossAxisSpacing: 16,
         children: [
           buildTile(context, 'Members', Icons.people, () {}),
-          buildTile(context, 'Chats', Icons.chat, () {}),
+          buildTile(context, 'Chats', Icons.chat, () {
+            final currentUser = ref.read(authProvider);
+            if (currentUser != null) {
+              // Generate dummy member profile for DK (pre-seeded profile)
+              final dummyMember = User(
+                id: 'member_dk_001',
+                role: UserRole.member,
+                name: 'DK',
+                email: 'dk@example.com',
+                assignedTrainerId: currentUser.id,
+              );
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ConversationScreen(
+                    peerUser: dummyMember,
+                    // MUST match the Guru App chatId format so both apps read/write to the same Hive conversation!
+                    chatId: 'chat_${dummyMember.id}_${currentUser.id}',
+                  ),
+                ),
+              );
+            }
+          }),
           buildTile(context, 'Requests', Icons.calendar_today, () {}),
           buildTile(context, 'Sessions', Icons.video_library, () {}),
         ],
