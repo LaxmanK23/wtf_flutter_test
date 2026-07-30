@@ -109,7 +109,7 @@ class _SessionLogsScreenState extends ConsumerState<SessionLogsScreen> {
                   label: Text(filter),
                   selected: _selectedFilter == filter,
                   onSelected: (val) => setState(() => _selectedFilter = filter),
-                  selectedColor: const Color(0xFF1769E0).withOpacity(0.2),
+                  selectedColor: const Color(0xFF1769E0).withValues(alpha: 0.2),
                 );
               }).toList(),
             ),
