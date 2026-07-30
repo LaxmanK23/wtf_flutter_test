@@ -7,6 +7,7 @@ import 'package:shared/widgets/conversation_screen.dart';
 import 'package:shared/models.dart';
 import 'package:shared/providers/auth_provider.dart';
 import 'package:trainer_app/requests_screen.dart';
+import 'package:shared/widgets/session_logs_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -75,7 +76,26 @@ class HomeScreen extends ConsumerWidget {
             );
           }),
           // buildTile(context, 'Requests', Icons.calendar_today, () {}),
-          buildTile(context, 'Sessions', Icons.video_library, () {}),
+          buildTile(context, 'Sessions', Icons.video_library, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SessionLogsScreen(
+                  onSchedulePressed: () {
+                    Navigator.pop(context);
+                    // If trainer wants to view requests instead when clicking CTA
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RequestsScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          }),
+          // buildTile(context, 'Sessions', Icons.video_library, () {}),
         ],
       ),
     );

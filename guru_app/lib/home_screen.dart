@@ -5,6 +5,7 @@ import 'package:shared/models.dart';
 import 'package:shared/providers/auth_provider.dart';
 import 'package:shared/widgets/card.dart';
 import 'package:shared/widgets/conversation_screen.dart';
+import 'package:shared/widgets/session_logs_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -68,7 +69,25 @@ class HomeScreen extends ConsumerWidget {
             );
           }),
           const SizedBox(height: 16),
-          buildCard(context, 'My Sessions', Icons.video_call, () {}),
+          buildCard(context, 'Session Logs', Icons.history, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SessionLogsScreen(
+                  onSchedulePressed: () {
+                    Navigator.pop(context); // Close logs
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ScheduleScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          }),
+          // buildCard(context, 'My Sessions', Icons.video_call, () {}),
         ],
       ),
     );
