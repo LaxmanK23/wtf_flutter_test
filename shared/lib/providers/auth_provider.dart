@@ -11,6 +11,18 @@ class AuthNotifier extends Notifier {
     return box.get('member_dk_001') as User?;
   }
 
+  Future loginAsTrainer() async {
+    final box = Hive.box('users');
+    final trainer = User(
+      id: 'trainer_aarav_001',
+      role: UserRole.trainer,
+      name: 'Aarav (Lead Trainer)',
+      email: 'aarav@trainer.com',
+    );
+    await box.put(trainer.id, trainer);
+    state = trainer; // Updates the UI instantly
+  }
+
   Future loginAsDK() async {
     final box = Hive.box('users');
 
