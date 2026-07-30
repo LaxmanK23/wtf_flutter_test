@@ -1,10 +1,10 @@
 ﻿## Security & Token Server Setup
-
+ 
 1. Navigate to the server folder:
    ```bash
    cd shared/server
    ```
-   Create a local .env file based on the template:
+Create a local .env file based on the template:
 
 ```bash
 cp .env.example .envs
